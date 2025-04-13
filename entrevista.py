@@ -1,28 +1,40 @@
-N = int(input('N'))
+N = int(input(''))
 L = []
 
 for c in range(N):
-    m = input('NxN')
+    m = input('')
     L.append(m)
 
 def ck(i1, i2):
-    print(i1-1,i2-1)
-    print(L[i1-1][i2-1], bool(int(L[i1-1][i2-1])))
+    #print(i1-1,i2-1)
+    #print(L[i1-1][i2-1], bool(int(L[i1-1][i2-1])))
     return bool(int(L[i1-1][i2-1]))#int pq bool('0') retorna true
 
-def checkFryend(K, Numeros):
-    for c in range(int(K)):
+def checkFryend(K, Numeros):#K é o numero de pessoa #N é o indice dos candidato
+    for c in range(int(K)):#Pra cada pessoa
         Resposta = 0
         for i in range(len(Numeros)-c-1):
+            #Vamos testar ela com todos os outro números menos ela mesma
+            #(Por isso o menos 1) e com quem ja foi testadom, então quando
+            # estivermos olhando o segundo numero c=1 rodamos uma interação a
+            # menos por que não precisa comparar o 2 com o 1
+            # quando tiver no 3 ai são 2 interações a menos por que ja comparamos
+            # ele com 2 e o 1.                                 
             Resposta = ck(int(Numeros[c]), int(Numeros[i+c+1]))
+            """
+            Agora se K aumenta tipo K=5 então agente vai rodar
+            K vezes o primeiro for, como Len(N) é proporcional a K
+            o for dentro do for c in range(int(K)) também vai ser 
+            rodado mais K/2 vezes então fica K*K/2
+            """
             if Resposta:
                 return True
     return Resposta
 
-E = int(input('E'))
+E = int(input(''))
 
 for c in range(E):
-    K = input('K')
+    K = input('')
     K = K.split()
     if checkFryend(K[0],K[1:]):
         print('S')
