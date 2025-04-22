@@ -1,0 +1,3 @@
+
+        // debug
+        cout << "vistos = { ";
