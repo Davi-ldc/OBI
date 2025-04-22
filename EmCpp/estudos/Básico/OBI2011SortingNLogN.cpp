@@ -56,7 +56,7 @@ int main(){
 
         int start = 0;
         int end = vistos.size()-1;
-        int v = valor
+        int v = valor;
         int index = vistos.size(); //se não achar retorna o tamanho por que ai vistos.size()-index é 0 
         //ou seja nenhhuma duplas
 
@@ -66,7 +66,8 @@ int main(){
             //então se start é 5 e end 6, por exemplo, mid vai ser 11/2 -> 5,5
             //mas sem a parte fracionária então fica 5
             
-            if (vistos[mid] > valor) //se o valor for maior, salvamos ele
+            vector<int> temp(vistos.begin(), vistos.end());
+            if ( temp[mid] > indice){ //se o valor for maior, salvamos ele
                 index = mid;
                 end = mid - 1; //depois de salvar mudamos a lista para todos os valores a esquerda dele
             } else {
@@ -75,9 +76,14 @@ int main(){
             }
         }
 
+        
+
         //se eu sei que o primeirno numero maior que o atual está no index x do set ordenado, então
         //eu sei que tem (vistos.size()-x) números maiores que o atual
-        Duplas += vistos.size() - index ;//
+        Duplas += vistos.size() - index;//
+
+        // cout << vistos.size() - index << endl; 
+        // cout << "valor: "<< indice << " index: " << index << " adicionado: "<< vistos.size() - index << endl;
 
         vistos.insert(indice);//O set deixa sorteado automaticamente
 
@@ -89,6 +95,7 @@ int main(){
     }
     cout << Duplas;
 
+}
 
 /*
 A grande sacada aqui é a seguinte, Primeiro perceba que o set já vem sorteado

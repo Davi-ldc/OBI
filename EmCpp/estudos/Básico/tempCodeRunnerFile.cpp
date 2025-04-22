@@ -1,3 +1,2 @@
-
-        // debug
-        cout << "vistos = { ";
+ cout << "vistos = { ";
+        for (
