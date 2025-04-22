@@ -54,10 +54,10 @@ int main(){
     set<int> vistos;
     for (auto& [valor, indice] : S) {
 
-        start = 0;
-        end = vistos.size()-1;
-        v = valor
-        index = vistos.size(); //se não achar retorna o tamanho por que ai vistos.size()-index é 0 
+        int start = 0;
+        int end = vistos.size()-1;
+        int v = valor
+        int index = vistos.size(); //se não achar retorna o tamanho por que ai vistos.size()-index é 0 
         //ou seja nenhhuma duplas
 
         // acha o index do primeiro número maior que o atual
