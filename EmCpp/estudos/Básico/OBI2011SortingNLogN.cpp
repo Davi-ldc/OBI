@@ -42,29 +42,54 @@ int main(){
     Pra cada interação queremos saber-> Das bailarinas já vistas (mais habilidosas), quantas tem experiencia MAIOR  
     do que a atual? 
 
-    A ideia para fazer isso em N log N é: Como o set por padrão deixa os itens organizados e agente só quer
-    adicionar um item, cada adição pode ser feita com busca binária O(logN) e ao inves de comparar todos os valores
-    como vistos é um set só com os indices ordenados agente pode só achar um indice menor ou igual ao atual e
-    dai pra frente todos vão ser maiores (isso é busca binária então tmb é O(log(N)))   
+    A ideia para fazer isso em N log N é: Ir salvando cada indice que agente olhou.
+    Como o set deixa em ordem de valor crescente é só achar o indice do primeiro 
+    número maior que o atual. Tipo se o set tem 5 números e o primeiro número 
+    maior que o atual está no indice 2 então tem 5-2 = 3 números restantes que 
+    podem virar duplas 
     */
+
+
 
     set<int> vistos;
     for (auto& [valor, indice] : S) {
-        int menores = distance(vistos.begin(), vistos.lower_bound(indice));
-        Duplas += menores;
-        vistos.insert(indice);//adiciona
-        
 
-        // debug
-        cout << "vistos = { ";
-        for (int v : vistos) {
-            cout << v << " ";
+        start = 0;
+        end = vistos.size()-1;
+        v = valor
+        index = vistos.size(); //se não achar retorna o tamanho por que ai vistos.size()-index é 0 
+        //ou seja nenhhuma duplas
+
+        // acha o index do primeiro número maior que o atual
+        while (start <= end) {
+            int mid = (start + end)/2;//repara que é uma divisão inteira,
+            //então se start é 5 e end 6, por exemplo, mid vai ser 11/2 -> 5,5
+            //mas sem a parte fracionária então fica 5
+            
+            if (vistos[mid] > valor) //se o valor for maior, salvamos ele
+                index = mid;
+                end = mid - 1; //depois de salvar mudamos a lista para todos os valores a esquerda dele
+            } else {
+                // Se for menor ou igual, procura à direita
+                start = mid + 1;
+            }
         }
-        cout << "}" << endl;
+
+        //se eu sei que o primeirno numero maior que o atual está no index x do set ordenado, então
+        //eu sei que tem (vistos.size()-x) números maiores que o atual
+        Duplas += vistos.size() - index ;//
+
+        vistos.insert(indice);//O set deixa sorteado automaticamente
+
+        // cout << "vistos = { ";
+        // for (int v : vistos) {
+        //     cout << v << " ";
+        // }
+        // cout << "}" << endl;
     }
     cout << Duplas;
 
-}
+
 /*
 A grande sacada aqui é a seguinte, Primeiro perceba que o set já vem sorteado
 Se eu tenho a matrix 2x2 com os index inversos :
