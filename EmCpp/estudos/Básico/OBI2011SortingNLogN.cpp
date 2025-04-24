@@ -61,12 +61,12 @@ int main(){
         //ou seja nenhhuma duplas
 
         // acha o index do primeiro número maior que o atual
+        vector<int> temp(vistos.begin(), vistos.end());
         while (start <= end) {
             int mid = (start + end)/2;//repara que é uma divisão inteira,
             //então se start é 5 e end 6, por exemplo, mid vai ser 11/2 -> 5,5
             //mas sem a parte fracionária então fica 5
             
-            vector<int> temp(vistos.begin(), vistos.end());
             if ( temp[mid] > indice){ //se o valor for maior, salvamos ele
                 index = mid;
                 end = mid - 1; //depois de salvar mudamos a lista para todos os valores a esquerda dele
@@ -92,6 +92,13 @@ int main(){
         //     cout << v << " ";
         // }
         // cout << "}" << endl;
+
+        //OBS: Solução mais eficiente continua sendo: Por que pra criar o veotr temp 
+        //o c anda por todos os coisos do set então é O(N) * busca binaria (logN) * o for que eles tão dentro O(N)
+        //Fica N²*Log(N)
+        // int Maiores = distance(vistos.upper_bound(indice), vistos.end());
+        // Duplas += Maiores;    
+        // vistos.insert(indice);
     }
     cout << Duplas;
 

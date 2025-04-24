@@ -1,2 +1,1 @@
- cout << "vistos = { ";
-        for (
+temp[mid] > indice
