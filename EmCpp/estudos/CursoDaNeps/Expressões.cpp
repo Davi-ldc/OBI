@@ -18,10 +18,11 @@ int main(){
 
     for (string str : v){
         bool valido = true;
-        vector<char> pilha(str.size());
+        vector<char> pilha;
         for (char s : str){
             if(s == '(' || s == '[' || s == '{' ){//se for aberto adiciona ele ao topo
                 pilha.push_back(s);
+                continue;
             }
             else if (pilha.size()==0){ //se usar um )}] antes de abrir ta errado
                 valido = false;
@@ -38,14 +39,14 @@ int main(){
                 break;
             }
         }
-        
-        if(valido && !pilha.empty()){
-            cout << "S";
+
+        if(valido && pilha.empty()){// o pilha.empty é pra caso ele termine abrindo sem fechar
+            cout << "S" << endl;
         }
         else{
-            cout << "N";
+            cout << "N" << endl;
         }
-        
-    
+
+
     }
 }
