@@ -1,3 +1,5 @@
+//https://neps.academy/br/course/fundamentos-das-estruturas-de-dados/lesson/copa-do-mundo
+
 #include <iostream>
 #include <bits/stdc++.h>
 
