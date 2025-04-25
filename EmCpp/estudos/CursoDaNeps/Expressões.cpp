@@ -40,7 +40,7 @@ int main(){
             }
         }
 
-        if(valido && pilha.empty()){
+        if(valido && pilha.empty()){// o pilha.empty é pra caso ele termine abrindo sem fechar
             cout << "S" << endl;
         }
         else{
