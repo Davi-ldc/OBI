@@ -22,6 +22,7 @@ int main(){
         for (char s : str){
             if(s == '(' || s == '[' || s == '{' ){//se for aberto adiciona ele ao topo
                 pilha.push_back(s);
+                continue;
             }
             else if (pilha.size()==0){ //se usar um )}] antes de abrir ta errado
                 valido = false;
@@ -38,14 +39,14 @@ int main(){
                 break;
             }
         }
-        
-        if(valido && !pilha.empty()){
-            cout << "S";
+
+        if(valido && pilha.empty()){
+            cout << "S" << endl;
         }
         else{
-            cout << "N";
+            cout << "N" << endl;
         }
-        
-    
+
+
     }
 }
