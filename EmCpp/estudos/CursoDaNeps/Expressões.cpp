@@ -18,7 +18,7 @@ int main(){
 
     for (string str : v){
         bool valido = true;
-        vector<char> pilha(str.size());
+        vector<char> pilha;
         for (char s : str){
             if(s == '(' || s == '[' || s == '{' ){//se for aberto adiciona ele ao topo
                 pilha.push_back(s);
