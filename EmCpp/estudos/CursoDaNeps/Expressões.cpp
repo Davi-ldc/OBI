@@ -17,10 +17,10 @@ int main(){
     }
 
     for (string str : v){
-        bool valido = false;
+        bool valido = true;
         vector<char> pilha(str.size());
         for (char s : str){
-            if(s == '(' || s == '[' || s == '{' ){
+            if(s == '(' || s == '[' || s == '{' ){//se for aberto adiciona ele ao topo
                 pilha.push_back(s);
             }
             else if (pilha.size()==0){ //se usar um )}] antes de abrir ta errado
@@ -28,21 +28,24 @@ int main(){
                 break;
             }
             char topo = pilha[pilha.size()-1];
-            if (s == '(' && topo == ')' ||
-                s == '[' && topo == ']' || 
-                s == '{' && topo == '}'){
-                    pilha.erase(pilha.begin()+pilha.size()-1); 
+            if (s == ')' && topo == '(' ||//se s for fechado e o topo for aberto
+                s == ']' && topo == '[' || 
+                s == '}' && topo == '{'){
+                    pilha.erase(pilha.begin()+pilha.size()-1); //tira eles 2 (no caso so o ultimo e nao adiciona o que fecha)
                 }
             else {
                 valido = false;
                 break;
             }
+        }
+        
         if(valido && !pilha.empty()){
             cout << "S";
         }
         else{
             cout << "N";
         }
-    }
+        
+    
     }
 }
