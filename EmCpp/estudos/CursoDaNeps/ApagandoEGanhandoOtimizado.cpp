@@ -7,15 +7,14 @@ using namespace std;
 
 int main(){
 
-    /*
-    A sacada aqui é que agente tem que tirar os menores numeros
-    da esqueda pra direita. Melhor, da pra ir adicionando
+    /* A grande sacada aqui é perceber que pra cada número que ele for remover
+    o melhor é focar no digito mais a esquerda. Por exemplo, no numero 123123
+    Se D=1 a prioridade deve ser o primeiro e segundo digito, depois o segundo e o terceiro
+    já que eles vão ter maior influencia no resultado final (Eu sei que é obvio falando mais demora pra perceber)
 
-    Ou eu poderia adicionar os maiores números em uma pilha, tipo dar
-    um sort
-    1 2 3 1 2 3
-    se fosse um vetor já sorteado
-    
+    Com essa ideia em mente, criamos uma pilha, só com o primeiro digito e ai pra cada digito seguinte é so 
+    chechar se ele é maior que o anterior. Se for e D>0 então devemos remover o anterior. Se não for maior
+    então só adicionamos ele a pilha, fazendo com que ele seja a nova prioridade.
     */
 
     int N=0,D=0;
@@ -44,15 +43,7 @@ int main(){
 
         vector<int> pilha;
         pilha.push_back(digitos[0]);
-        /* A grande sacada aqui é perceber que pra cada número que ele for remover
-        o melhor é focar no digito mais a esquerda. Por exemplo, no numero 123123
-        Se D=1 a prioridade deve ser o primeiro e segundo digito, depois o segundo e o terceiro
-        já que eles vão ter maior influencia no resultado final (Eu sei que é obvio falando mais demora pra perceber)
 
-        Com essa ideia em mente, criamos uma pilha, só com o primeiro digito e ai pra cada digito seguinte é so 
-        chechar se ele é maior que o anterior. Se for e D>0 então devemos remover o anterior. Se não for maior
-        então só adicionamos ele a pilha, fazendo com que ele seja a nova prioridade.
-        */
         for (int i=1; i<digitos.size();i++){
             
             while(!pilha.empty() && pilha.back() < digitos[i] && D >0){
