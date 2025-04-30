@@ -4,82 +4,92 @@
 using namespace std;
 
 /*
-Ta, agente tem que contar quantos pares (i,j) onde 1<=i<=j<=N existem
-tais que o somatório C[i] + C[i+1]... C[j] seja igual a D 
+Agente que os pares i,j cujo a soma dos itens de i até j sejam = D OUU
+que item[1]+item[2] até item na posição i + item na posição j + item na posição j + 1 até N (o final)
+também sejam iguais a D
 
-Como sempre vamo analisar uma entrada:
-
-5 10 //numero de pedaços e a quantidade que vc quer comer
-1 2 3 4 3 //tamanho dos pedaços
-0 1 2 3 4 //index
-
-Ta, no exemplo acima tem 5 pedaços, e eu quero comer 10cm de sanduiche
-mas eu não posso pegar de forma aleatória. Tem que ser ou das estremidades
-ou uma sequencia. Nesse caso, da pra pegar os 4 primeiros pedaços
-Já que 1+2+3+4 = 10, pegar os ultimos 3 (3+3+4), ou pegar das extremidades (1+2 + 4+3);
-Tá acho que entendi melhor o que ele quer e a ideia de extremidades, tipo assim
-pegar das extremidades é tipo excluir o meio. Pegar os pedaços 1,2  4,3 é excluir o 3 do meio
-da pra represenatar isso como pegar do 0 até 1 e depois do 4 até o 3. Ou 
-de 0 até i, de j até o final
-
-5 5
-1 1 1 1 1
-0 1 2 3 4
-
-Ta, aqui eu quero comer 5 centimetros, é massa pensar que pra cada ação ele pode comer o 
-seguinte ou pegar da extremidade, então vamo dividir em 2 grupos. 
-Só sequencia-> Só tem como ser do elemento 0 até o 4
-Usando as extremidades-> Poderia pegar 3 vezes da extremidade exquerda e 2 vezes da extremidade direita
-ou 2 vezes da esquerda e 3 da direira //mas como o index tem que ser i,j onde i é menor essa opção ta fora
-Poderia pegar 5 da extremidade esquerda e 0 da direita;
-4 da extremidade esquerda e 1 da direita (4,1)
-3 da extremidade esquerda e 2 da direita (3,2)
-2 da extremidade esquerda e 3 da direita (2,3)
-1 da extremidade esquerda e 4 da direita (1,4)
-0 da extremidade esquerda e 5 da direita (0,5)
-
-Masss ele quer o par i j onde i é menor ou igual a j então as opções são
-Pegar a sequencia (0,4) e as extremidades (0,4), (1,3), (2,2)
-dai pra frente já é j>i então ta fora (já que AB e BA é a mesma coisa)
-
-Ta, mas como eu vou checar isso... Só o caso da sequencia 
-1 1 1 1 1//valor
-0 1 2 3 4//index
-tem 5² sequencias possiveis se você pensar em i,j i pode ser de 0 a 4 e j tmb então 5x5 possibilidades
-Eu poderia testar todas elas e ver se alguma soma D mas ai é O(N²) e como N pode ser até 10^6 o ideal é
-log n, n log n ou até O(N)
-
-A questão aqui é, dado uma lista de inteiros de quantas formas eu posso somar 10 com caras consecutivos?
-Até quando é so das bordas, ainda são elementos consecutivos. Maibe de pra usar uma recursão tipo ver quanto soma
-os caras 0-1 2-3 4-5... meh, não funciona por que se fosse 0 2 não ia pegar.
-
-Maibe um map com valor, index deixaria eles ordenados por valor... meh não sei como ajudaria a encontrar
-os que somam D.
-
-Analizando outra entrada:
-9 618 //N,D
-665 658 248 282 428 562 741 290 457
-Maibe pra olhar a sequencia da pra checar 0, 0+1 e se for > D então já começa a partir de index onde parou +1 
-se for == D então resposta++ e também continua de D+1. repara que isso é O(N) #CHECK
-
-Mas ainda falta as extremidades, pensa em como um humano faria, naquele caso tipo
-
-5 10//N, D
+5 10
 1 2 3 4 3
 
-Eu ia ver a soma de um lado e ir comparando com a do outro mas fica em N² se eu olhar tipo
-primeiro + ultimo
-primeiro + segundo +ultimo
-primeiro + segundo + terceiro + ultimo ai quando terminasse ainda teria que ver
-primeir + segundo + penultimo + ultimo... Que horor. Talvez de pra ir comparando de outra forma
+Nessa entrada por exemplo, eu poderia checar 1+2 1+2+3 1+2+3+4... tá aqui resposta ++ e não precisa checar com
+o ultimo elemento (já que vai passar de D) mas depois eu preciso testar 2+3 2+3+4 2+3+4+3 até que a soma seja >D
+ou acabe a lista. O que é N²/2
 
-Da até pra imendar com o calculo das sequencia, pensa comigo, se primeiro + segundo = x 
-então falta D-x pra pra chegar a D... Acho que essa é a ideia principal ir percorendo o array da 
-esquerda pra direita checando as sequencias e ao mesmo tempo tipo olhou o primeiro, olha o ultimo
-olhou o primeiro + segundo se isso for > D então não precisa olhar... Alguma coisa assim, acho que fica em 
-O(N)
+Já o negocio das bordas é mais complexo por que é como se fosse a soma de 2 sequencias. a soma da sequencia da 
+esquerda (que já estamos testando com a logica acima) e a sequencia da direita. o problema aqui é que pra cada
+i podem haver C.size()/2 j tipo você se size = 6, você pode pegar (0, 6) (1,5) (1,4) (1,3) (1,2) (1,1)
+ou seja fica em N² 
+
+
+Ta, resolvi em N², mas tem algum jeito mais eficiente,
+ainda pensando em dividir em 2 partes, imagina um algoritimo parecido, também em N² mas ao inves de 
+procurar somas = D ele acha a maior soma menor ou igual a D dado uma posição i, tipo no caso de [2,2,3,3,2,3]
+
+index ->  0 1 2 3 4 5 
+i = 0 -> [(2,2,3),3,2,3] vai pegar os primeiros 3 digitos por que eles são iguais a 7
+i = 1 -> [2,(2,3),3,2,3] primeiros 2 digitos por que eles somam 5 e se adicionasse o proximo daria 8
+i = 2 -> [2,2,(3,3),2,3]
+i = 3 -> [2,2,3,(3,2),3]
+i = 4 -> [2,2,3,3,(2,3)]
+i = 5 -> [2,2,3,3,2,(3)]
+
+a ideia aqui é: Pra cada indice i, até que j podemos ir sem que a soma ultrapasse D?
+
+Repara que se de i até j a soma é x então de i+1 até j a soma é x-C[i]. Mais comentarios em cima do códido:
+
+
 */
 
 int main(){
 
+    int N,D;//Numero de pedaços e Soma
+    cin >> N >> D;
+
+    vector<int> C; //Comprimento dos pedaços
+    for (int i=0; i<N;i++){
+        int c;
+        cin >> c;
+        C.push_back(c);
+    }
+
+
+
+    //1 2 3 4 3-> valor
+    //0 1 2 3 4 -> index
+    /*
+    pensa assim, agente vai ir somando, 1+2 = 3; 3+3 = 6; 6+4 -> 10. Ta 
+    agora agente sabe que do index 0 até o index 3 a soma é 10. 
+    Quer dizer então que de 1 até 3 a soma é = soma de 0 até 3 - elemento[0];
+
+    Tipo -> 
+    [A] + [B] + [C] = 10 
+    [B] + [C] = 10 - [A]
+
+    E ai, com essa informalção podemos evitar intervalos desnecessários, tipo se o algoritmo chegou a
+    [A] + [B] + [C] + [D] = 15
+    Quer dizer que A+B+C é <= 10, Ou seja, não precisamos testar B+C
+
+    A grande sacada aqui é perceber que:
+        * Se a soma dos elementos de um vetor C de i até j é x, a soma de i+1 até j é x-C[i]
+        * 
+
+
+    */
+    int resposta=0;
+    int soma =0;
+    int i =0;
+    for (int j = 0; j<N; j++){
+        soma+=C[k];
+        while (soma > D){
+            soma-=C[i];
+            i++;
+        }
+        if (soma == D){
+            resposta++;
+        }
+    }
+
+
+    cout << resposta;
+    return 0;
 }
