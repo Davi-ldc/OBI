@@ -35,7 +35,15 @@ i = 5 -> [2,2,3,3,2,(3)]
 
 a ideia aqui é: Pra cada indice i, até que j podemos ir sem que a soma ultrapasse D?
 
-Repara que se de i até j a soma é x então de i+1 até j a soma é x-C[i]. Mais comentarios em cima do códido:
+Repara que se de i até j a soma é x então de i+1 até j a soma é x-C[i]. 
+
+ou seja, agente só precisa de 2 ponteiros , j sempre anda pra frente e equando a soma
+for maior > D movemos i (pra continua somando a partir de i++) e atualizamos a soma 
+Soma -= C[i] (isso antes do i++)
+
+Ta, mais falta resolver o outro problema: "Quantos pares i, j existem tal que a soma
+C[1]+C[2]... C[i] + C[J] + C[J+1]", acho que a ideia é parecida com a com a outra, tipo agente tem 2 sequencias,
+i tem que ser menor ou igual a j, 
 
 
 */
@@ -71,8 +79,6 @@ int main(){
 
     A grande sacada aqui é perceber que:
         * Se a soma dos elementos de um vetor C de i até j é x, a soma de i+1 até j é x-C[i]
-        * 
-
 
     */
     int resposta=0;
