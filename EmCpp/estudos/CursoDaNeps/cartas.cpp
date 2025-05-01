@@ -10,7 +10,13 @@ Esse é relativamente simples, temos 2 conjuntos sorteados
 1 3 5
 2 4 6 8 
 e ele quer saber quantos elementos diferentes tem entre eles. então da pra interar sobre cada 
-numero do menor set e ver se ele existe no maior
+numero do menor set e ver se ele existe no maior.
+
+A sacadas aqui é perceber que cartas repetidas não importam, por que elas só podem trocar uma delas, tornando o set
+ideial pro problema.
+OBS-> Pequeno mistake que eu fiz e demorei um tempão pra perceber é que não da pra usar A e B
+pra determinar qual o set de tamanho maior por que eles contam as cartas repetidas
+
 */
 
 int main(){
@@ -31,8 +37,8 @@ int main(){
     }
 
     // O(1)  A é >= B? Se for Y se não 
-    set<int> &maiorSet = (A >= B ? X : Y);
-    set<int> &menorSet =  (A<B ? X : Y);
+    set<int> &maiorSet = (X.size() >= Y.size() ? X : Y);
+    set<int> &menorSet =  (X.size() < Y.size() ? X : Y);
 
     int resposta = 0;
     for (int num : menorSet){//(N log(N))

@@ -42,9 +42,11 @@ for maior > D movemos i (pra continua somando a partir de i++) e atualizamos a s
 Soma -= C[i] (isso antes do i++)
 
 Ta, mais falta resolver o outro problema: "Quantos pares i, j existem tal que a soma
-C[1]+C[2]... C[i] + C[J] + C[J+1]", acho que a ideia é parecida com a com a outra, tipo agente tem 2 sequencias,
-i tem que ser menor ou igual a j, 
+C[1]+C[2]... C[i] + C[J] + C[J+1]  = D e i seja menor ou igual a j",
+acho que a ideia é parecida com a com a outra, de ter ponteiro que so avançam,
 
+Vamos pensar n ojeito mais burro de fazer primeiro, tem uma lista:
+1 2 3 4 3
 
 */
 
