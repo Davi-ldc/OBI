@@ -87,7 +87,7 @@ int main(){
     int soma =0;
     int i =0;
     for (int j = 0; j<N; j++){
-        soma+=C[k];
+        soma+=C[i];
         while (soma > D){
             soma-=C[i];
             i++;
