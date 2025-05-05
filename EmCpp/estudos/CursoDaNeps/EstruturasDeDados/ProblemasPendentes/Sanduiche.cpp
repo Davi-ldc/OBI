@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include <bits/stdc++.h>
 
@@ -19,7 +21,6 @@ Já o negocio das bordas é mais complexo por que é como se fosse a soma de 2 s
 esquerda (que já estamos testando com a logica acima) e a sequencia da direita. o problema aqui é que pra cada
 i podem haver C.size()/2 j tipo você se size = 6, você pode pegar (0, 6) (1,5) (1,4) (1,3) (1,2) (1,1)
 ou seja fica em N² 
-
 
 Ta, resolvi em N², mas tem algum jeito mais eficiente,
 ainda pensando em dividir em 2 partes, imagina um algoritimo parecido, também em N² mas ao inves de 
