@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 // Cada linha deve conter todos os números de 1 a 9, sem repetição.
 // Cada coluna deve conter todos os números de 1 a 9, sem repetição.
 // Cada subgrade 3x3 deve conter todos os números de 1 a 9, sem repetição.
@@ -35,7 +36,38 @@ na linha; na coluna; no quadrante. e se não tiver nenhum faz o backtrack
 */
 
 
+bool isval(vector<vector<int>> M, int i, int j, int v){
+    
+    //linha
+    for (int k =0; k < M.size(); k++){
+        if(M[i][k] == v){
+            return false;
+        }
+    }
+    //coluna
+    for (int k =0; k < M.size(); k++){
+        if(M[k][j] == v){
+            return false;
+        }
+    }
 
+    //quadrante-> 
+    vector<vector<int> MQ = {
+        {0, 1, 2},
+        {3, 4, 5},
+        {6, 7, 8}
+    }
+    int quadrante = MQ[i/3][j/3];
+
+    for (int k = quadrante*3; k<M.size(); k++){
+        for (int l =0; l<M.size(); l++){
+
+        }
+    }
+
+
+    
+}
 
 int main(){
 
