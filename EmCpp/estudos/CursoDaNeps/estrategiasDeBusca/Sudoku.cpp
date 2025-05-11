@@ -36,7 +36,7 @@ na linha; na coluna; no quadrante. e se não tiver nenhum faz o backtrack
 */
 
 
-bool isval(vector<vector<int>> M, int i, int j, int v){
+bool isval(vector<vector<int>>& M, int i, int j, int v){
     
     //linha
     for (int k =0; k < M.size(); k++){
@@ -51,43 +51,88 @@ bool isval(vector<vector<int>> M, int i, int j, int v){
         }
     }
 
-    //quadrante-> 
-    vector<vector<int> MQ = {
-        {0, 1, 2},
-        {3, 4, 5},
-        {6, 7, 8}
-    }
-    int quadrante = MQ[i/3][j/3];
-
-    for (int k = quadrante*3; k<M.size(); k++){
-        for (int l =0; l<M.size(); l++){
-
+    int cmci = (i/3)*3;
+    int cmcj = (j/3)*3;
+    for (int k =cmci; k<cmci+3; k++){
+        for (int l=cmcj; l<cmcj+3; l++){
+            if(M[k][l] == v){
+                return false;
+            }
         }
     }
 
-
+    return true;
     
+}
+
+// vector<int> n = {1,2,3,4,5,6,7,8,9};
+
+bool solveSDK(vector<vector<int>>& M){
+
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){//percore todas as celulas
+            if (M[i][j] == 0){//se tiver vazia 
+
+                for(int k=0; k<9; k++){ //Tenta todos os numeros de 1 a 9
+                    if (isval(M,i,j,k+1)){ //se um deles for valido
+
+                        M[i][j] = k+1;//tenta resolver com esse numero a partir da qui
+
+                        if (solveSDK(M)){
+                            return true; 
+                        }
+                        else{//se não desfaz a jogada e tenta outro numero
+                            M[i][j] = 0;
+                        }
+
+                    }
+                }
+
+                //Se testar todos os numeros possiveis sem sucesso retorna false
+                return false;
+            }
+        }
+    }
+    return true; //Quando tudo tiver preenchido, vai chegar aqui 
 }
 
 int main(){
 
-    vector<vector<int>> tabuleiro;
+    vector<vector<int>> M(9, vector<int>(9,0));//inicia as 9 colunas
 
     for (int i =0; i<9; i++){// pra cada linha
         for (int j = 0; j<9; j++){// le 9 numeros
-            int temp;
-            cin >> temp;
-            tabuleiro[i].push_back(temp);
+            cin >> M[i][j];
        }
     }
 
-    //debug
-    // for (auto x : tabuleiro){
-    //     for (int i : x){
-    //         cout << i << " ";
-    //     }
-    //     cout << endl;
-    // }
+    bool valido = true;
+    for (int i = 0; i < 9 && valido; i++) {
+        for (int j = 0; j < 9 && valido; j++) {//pra toda celula
+            if (M[i][j] != 0) {//se a celula tiver preenchida
+                int temp = M[i][j];
+                M[i][j] = 0;
+                if (!isval(M, i, j, temp)) {
+                    valido = false;
+                }
+                M[i][j] = temp;
+            }
+        }
+    }
+
+    if (!valido){
+        cout << "NO SOLUTION";
+    }
+    else {
+        solveSDK(M);
+        for (auto x : M){
+            for (int i : x){
+                cout << i << " ";
+            }
+            cout << endl;
+        }
+    }
+
 
 
     return 0;
