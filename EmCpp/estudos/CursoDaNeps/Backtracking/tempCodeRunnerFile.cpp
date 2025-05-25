@@ -1,1 +1,0 @@
-            resposta += possibilidades(SomaDesejada, K, resposta, V);
