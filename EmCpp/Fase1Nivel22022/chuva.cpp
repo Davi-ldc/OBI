@@ -1,5 +1,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int main(){
@@ -13,16 +14,16 @@ int main(){
 
     int resposta = 0;
 
-    //soma todas as possibilidades de subarrays que tenham soma igual a Sd
-    for(int i = 0; i<N; i++){
-        int soma = 0;
-        for(int j = 0; j<N-i; j++){
-            soma += V[j+i];
-            if(soma == Sd){
-                resposta++;
-            }
-        }
+    vector<int> prefixSum(N);
+    int soma = 0;
+    for(int i =0; i < N; i++){
+        soma += V[i]
+        prefixSum[i] = soma; 
     }
+
+    //repara que a soma de a até b é prefix[b] - prefix[a]
+
+    //ai ele quer saber de quantas formas podemos somar R
 
     cout << resposta;
     return 0;
