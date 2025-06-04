@@ -39,49 +39,46 @@ E 12
 E 34
 
 
-Ta, recebeu do 12 e passou 2 segundos, ou seja matrix [12] = 2
 */
 
-int main(){
-
+int main() {
     int N; cin >> N;
-    
-    // vector<pair<char,int>> V();
-    map<int,int> V;
-    map<int,int> Resposta;
-    int t = 0;
-    
-    bool b = false;
-    for (int i =0; i<N; i++){
+
+    map<int, int> V;        
+    map<int, int> Resposta;  
+    int tempo = 0;
+    int delta = 0; // tempo entre eventos
+
+    for (int i = 0; i < N; i++) {
         string c;
         int x;
         cin >> c >> x;
-        if (c == "R"){
-            V.insert({x,0});
-            b = true;
-        }
-        else if (c == "E"){
-            Resposta.insert({x,V[x]});
-            V.erase(x);
-            // b = true;
-        }
-        else if (c == "T"){
-            for(auto& p : V){
-                p.second += x;
-            }
-            b = false;
-        }
-        else if(b=true){
-            for(auto& p : V){
-                p.second += 1;
+
+        if (c == "T") {
+            delta = x; 
+        } else {
+            tempo += (delta == 0 ? 1 : delta); 
+            delta = 0; 
+            if (c == "R") {
+                V[x] = tempo;
+            } else if (c == "E") {
+                Resposta[x] += tempo - V[x];
+                V.erase(x);
             }
         }
     }
 
-    for( auto p: Resposta){
-        cout << p.first << " " << p.second << endl;
-    }
+    set<int> todos;
+    for (auto p : Resposta) todos.insert(p.first);
+    for (auto p : V) todos.insert(p.first);
 
+    for (auto x : todos) {
+        if (V.count(x)) {
+            cout << x << " -1" << endl;
+        } else {
+            cout << x << " " << Resposta[x] << endl;
+        }
+    }
 
     return 0;
 }
