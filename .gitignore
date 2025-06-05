@@ -1,0 +1,22 @@
+# Ignorar SDL2.dll
+Projetos/SDL2.dll
+
+# Ignorar pasta src inteira
+Projetos/src/
+
+# Opcional: Ignorar outros arquivos comuns de build
+*.exe
+*.o
+*.obj
+*.lib
+*.a
+*.dll
+*.so
+*.dylib
+
+# Ignorar arquivos de IDE/Editor
+.vscode/
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.sln
