@@ -1,3 +1,5 @@
+// https://neps.academy/br/course/estrategias-avancadas-de-programacao/lesson/consultas-de-soma-em-intervalos
+
 #include <iostream>
 #include <bits/stdc++.h>
 
