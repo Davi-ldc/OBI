@@ -1,3 +1,5 @@
+// https://neps.academy/br/course/estrategias-avancadas-de-programacao/lesson/troco
+
 #include <iostream>
 #include <bits/stdc++.h>
 

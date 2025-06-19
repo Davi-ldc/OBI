@@ -1,3 +1,5 @@
+//https://neps.academy/br/course/estrategias-avancadas-de-programacao/lesson/sanduiche
+
 #include <iostream>
 #include <bits/stdc++.h>
 
@@ -86,6 +88,12 @@ int main(){
         Pfsum[soma]++; //lembrando que se Pfsum[soma] nao existe, ele cria com valor 0
     }
 
+    vector<int> sufixos(N);
+    sufixos[N-1] = C[N-1];
+    for (int k = N - 2; k >= 0; k--) {
+        sufixos[k] = sufixos[k+1] + C[k];
+    }
+
     int somai = 0;
     for (int i = 0; i < N - 1; i++) { // até N-1, porque j > i
         somai += C[i];
@@ -94,9 +102,8 @@ int main(){
         if (Pfsum.count(falta))
             resposta += Pfsum[falta];
 
-        // Antes de passar pro próximo i, remove o sufixo que começa em j = i+1
-        int remove = 0;
-        for (int k = i + 1; k < N; k++) remove += C[k];  // soma de j = i+1 até N-1
+
+        int remove = sufixos[i + 1];  // soma de j = i+1 até N-1
         Pfsum[remove]--;
         if (Pfsum[remove] == 0)
             Pfsum.erase(remove);
