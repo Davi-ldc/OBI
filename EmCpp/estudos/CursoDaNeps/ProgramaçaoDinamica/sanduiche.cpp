@@ -62,28 +62,46 @@ int main(){
     */
     int resposta=0;
 
-    int soma =0;
+    int s =0;
     int i =0;
     int j =0;
     while(j<N){
-        soma+=C[j];
-        while (soma > S && i<=j){
-            soma -= C[i];
+        s+=C[j];
+        while (s > S && i<=j){
+            s -= C[i];
             i++;
         }
-        if(soma == S){
+        if(s == S){
             resposta++;
         }
         j++;
     }
 
     //parte 2 soma(C[0] até C[i]) + soma(C[j] até C[N-1]) == S
-    //prefix sum pra j 
-    vector<int> Psj(N+1);
-    for (int i = 1; i <= N; i++) {
-        //prefix de 2 = prefix 1 + Lista[1];
-        Psj[i] = Psj[i-1] + C[i-1];
+    //map com prefix sums de 
+    map<int, int> Pfsum;
+    int soma = 0;
+    for (int j = N - 1; j >= 1; j--) {  //(não inclui j=0)
+        soma += C[j];
+        Pfsum[soma]++; //lembrando que se Pfsum[soma] nao existe, ele cria com valor 0
     }
+
+    int somai = 0;
+    for (int i = 0; i < N - 1; i++) { // até N-1, porque j > i
+        somai += C[i];
+        int falta = S - somai;
+
+        if (Pfsum.count(falta))
+            resposta += Pfsum[falta];
+
+        // Antes de passar pro próximo i, remove o sufixo que começa em j = i+1
+        int remove = 0;
+        for (int k = i + 1; k < N; k++) remove += C[k];  // soma de j = i+1 até N-1
+        Pfsum[remove]--;
+        if (Pfsum[remove] == 0)
+            Pfsum.erase(remove);
+    }
+
     cout << resposta;
     return 0;
 
