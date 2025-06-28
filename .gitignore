@@ -17,3 +17,7 @@ Projetos/src/
 *.vcxproj
 *.vcxproj.filters
 *.sln
+
+# Vckpg
+vcpkg_installed/
+build/
