@@ -94,9 +94,10 @@ public:
                          std::string oldFilename) override {
         
         if (action == efsw::Actions::Modified || action == efsw::Actions::Moved) {
-            // Verifica se é arquivo .glsl (compatível com C++17)
-            if (filename.length() >= 5 && 
-                filename.substr(filename.length() - 5) == ".glsl") {
+            // Verifica se é arquivo shader
+            if ((filename.length() >= 5 && filename.substr(filename.length() - 5) == ".glsl") ||
+                (filename.length() >= 5 && filename.substr(filename.length() - 5) == ".vert") ||
+                (filename.length() >= 5 && filename.substr(filename.length() - 5) == ".frag")) {
                 std::lock_guard<std::mutex> lock(shaderMutex);
                 changedFiles.push(filename);
                 needsReload = true;
@@ -251,8 +252,8 @@ int SDL_main(int argc, char* argv[]) {
     fileWatcher.watch();
     
     // Carrega shaders iniciais
-    std::string vertSrc = loadShaderSource("vertex.glsl");
-    std::string fragSrc = loadShaderSource("fragment.glsl");
+    std::string vertSrc = loadShaderSource("vertex.vert");
+    std::string fragSrc = loadShaderSource("fragment.frag");
     GLuint shader = createProgram(vertSrc.c_str(), fragSrc.c_str());
     
     if (shader != 0) {
@@ -342,8 +343,8 @@ int SDL_main(int argc, char* argv[]) {
             }
             
             // Carrega e compila novos shaders
-            vertSrc = loadShaderSource("vertex.glsl");
-            fragSrc = loadShaderSource("fragment.glsl");
+            vertSrc = loadShaderSource("vertex.vert");
+            fragSrc = loadShaderSource("fragment.frag");
             GLuint newShader = createProgram(vertSrc.c_str(), fragSrc.c_str());
             
             if (newShader != 0) {
