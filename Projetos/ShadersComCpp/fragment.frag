@@ -25,7 +25,7 @@ void main(){
         float phase = freq * (pos * rot).y + speed * time + i;
 
         // Add a perpendicular sine wave offset
-        pos += amplitude * rot[0] * sin(phase) / freq;
+        pos += amplitude * rot[0] * cos(phase) / freq;
 
         // Rotate for the next octave
         rot *= mat2(0.6, -0.8, 0.8, 0.6);
