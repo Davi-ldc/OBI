@@ -176,8 +176,9 @@ tambem todos os outros. Tipo quando e chegar nesse 1, como ele é um valor menor
 matrix resposta somar o poder final dele ao meu e mudar todos os outros coisos pelo qual ele passou para 0
 
 meh a ideia ta ok mas a implementação não é essa 
-
 */
+
+
 
 
 main (){
@@ -185,7 +186,11 @@ main (){
     int N;M cin >> N >> M;
 
     vector<vector<int>> matriz(N, vector<int>(M));
-
+    for (int i =0; i<N; i++){
+        for (int j =0; j<N; j++){
+            
+        }
+    }
 
 
 }
