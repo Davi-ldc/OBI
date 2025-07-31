@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main() {
+main() {
     int N; cin >> N;
     vector<char> C(N);
     for (int i = 0; i < N; i++) {
