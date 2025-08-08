@@ -6,24 +6,25 @@
 using namespace std;
 
 main() {
-    int N; cin >> N;
-    vector<char> C(N);
-    for (int i = 0; i < N; i++) {
-        cin >> C[i];
-    }
+    int N; cin>>N;
 
-    map<char, int> Mapa;
-    vector<char> ordem;
-    for (char c : C) {
-        if (Mapa.find(c) == Mapa.end()) {
-            Mapa[c] = 1;
-            ordem.push_back(c); 
-        } else {
-            Mapa[c]++;
+    char anterior; cin >> anterior;
+    int x = 1;
+    if (N==1){
+        cout << x << " " << anterior << " ";
+    }
+    for (int i=1; i<N; i++){
+        char c; cin >> c;
+        if (c==anterior){
+            x+=1;
         }
-    }
-
-    for (char c : ordem) {
-        cout << Mapa[c] << " " << c << " ";
+        if (c!=anterior){
+            cout << x << " " << anterior << " ";
+            x = 1;
+            anterior = c;
+        }
+        if (i == N-1){
+            cout << x << " " << c << " ";
+        }
     }
 }
