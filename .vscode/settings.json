@@ -1,6 +1,3 @@
 {
-    "C_Cpp.default.compilerPath": "c:\\mingw64\\mingw64\\bin\\g++.exe",
-    "files.associations": {
-        "iostream": "cpp"
-    }
+    "code-runner.runInTerminal": true
 }
