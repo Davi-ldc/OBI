@@ -27,7 +27,6 @@ tipo "qual o maior valor V pra capacidade 10?" como esse elemento gasta 8, é o 
 dp[10-8]
 
 Formalizando, dp[i] = dp[i-Peso] + Valor; Ai tem que checar se esse novo máximo é maior que o anterior
-
 */
 
 

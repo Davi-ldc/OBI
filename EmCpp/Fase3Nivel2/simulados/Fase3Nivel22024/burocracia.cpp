@@ -48,6 +48,10 @@ void reestruturar(int v){
 }
 
 main(){
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+
+
   cin >> N;
   grafo.resize(N+5);//gordurinha XD
   p.resize(N+5);
