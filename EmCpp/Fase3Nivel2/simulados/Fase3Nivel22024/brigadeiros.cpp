@@ -24,15 +24,8 @@ dp[i][j][c] com o custo mínimo para que os j primeiros amigos peguem c brigadei
 ai analizando da esquerda pra direita eu posso pegar ou não cada prato 
 
 dp[1][1][9] = abs(1-2) = 1;
+dp[1][2] = max()
 
-ta ai passando pra frente dp[2][1] tenho 2 opções, pegar ou não o prato; Se eu não pegar o custo é o mesmo 
-logo dp é dp[i-1][j][c]; mas se eu decidir pegar um prato...
-os amigos vão estar em ordem, logo os amigos anteriores (j-1) tem que estar em pratos i-1 
-
-
-os j-1 amigos anteriores já devem ter sido alocados entre os i-1 pratos anteriores, coletando um total de c - P[i] brigadeiros.
-O custo para isso é dp[i-1][j-1][c - P[i]]. A esse custo, adicionamos o custo de movimento para o j-ésimo amigo, 
-que é a distância entre sua posição inicial e o prato i.
 
 */
 

@@ -66,9 +66,9 @@ main (){
       min++;
     }
     
-    for(int x: V){
-      cout << x << " ";
-    }
+    // for(int x: V){
+    //   cout << x << " ";
+    // }
 
     // cout << endl;
   }
